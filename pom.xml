@@ -11,6 +11,7 @@
     <modules>
         <module>design-factory-01</module>
         <module>design-factory-00</module>
+        <module>design-factory-02</module>
     </modules>
     
     <properties>
