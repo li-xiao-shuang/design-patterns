@@ -14,34 +14,20 @@
  * limitations under the License.
  */
 
-import util.RedisUtils;
+package factory;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author lixiaoshuang
  */
-public class CacheServcieImpl implements CacheService {
+public interface ICacheAdapter {
     
-    private RedisUtils redisUtils = new RedisUtils();
+    String get(String key);
     
-    @Override
-    public String get(String key) {
-        return redisUtils.get(key);
-    }
+    void set(String key, String value);
     
-    @Override
-    public void set(String key, String value) {
-        redisUtils.set(key, value);
-    }
+    void set(String key, String value, long timeout, TimeUnit timeUnit);
     
-    @Override
-    public void set(String key, String value, long timeout, TimeUnit timeUnit) {
-        redisUtils.set(key, value, timeout, timeUnit);
-    }
-    
-    @Override
-    public void del(String key) {
-        redisUtils.del(key);
-    }
+    void del(String key);
 }

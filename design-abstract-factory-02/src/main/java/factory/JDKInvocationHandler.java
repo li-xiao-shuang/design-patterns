@@ -1,4 +1,4 @@
-/*
+package factory;/*
  * Copyright 2021 Gypsophila open source organization.
  *
  * Licensed under the Apache License,Version2.0(the"License");
@@ -14,34 +14,26 @@
  * limitations under the License.
  */
 
-import util.RedisUtils;
+import util.ClassLoaderUtils;
 
-import java.util.concurrent.TimeUnit;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 
 /**
  * @author lixiaoshuang
  */
-public class CacheServcieImpl implements CacheService {
+public class JDKInvocationHandler implements InvocationHandler {
     
-    private RedisUtils redisUtils = new RedisUtils();
+    private ICacheAdapter iCacheAdapter;
     
-    @Override
-    public String get(String key) {
-        return redisUtils.get(key);
+    public JDKInvocationHandler(ICacheAdapter iCacheAdapter) {
+        this.iCacheAdapter = iCacheAdapter;
     }
     
-    @Override
-    public void set(String key, String value) {
-        redisUtils.set(key, value);
-    }
     
     @Override
-    public void set(String key, String value, long timeout, TimeUnit timeUnit) {
-        redisUtils.set(key, value, timeout, timeUnit);
-    }
-    
-    @Override
-    public void del(String key) {
-        redisUtils.del(key);
+    public Object invoke(Object o, Method method, Object[] args) throws Throwable {
+        return iCacheAdapter.getClass().getMethod(method.getName(), ClassLoaderUtils.getClazzByArgs(args))
+                .invoke(iCacheAdapter, args);
     }
 }

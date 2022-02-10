@@ -1,4 +1,4 @@
-/*
+package impl;/*
  * Copyright 2021 Gypsophila open source organization.
  *
  * Licensed under the Apache License,Version2.0(the"License");
@@ -14,34 +14,18 @@
  * limitations under the License.
  */
 
-import util.RedisUtils;
-
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author lixiaoshuang
  */
-public class CacheServcieImpl implements CacheService {
+public interface CacheService {
     
-    private RedisUtils redisUtils = new RedisUtils();
+    String get(final String key);
     
-    @Override
-    public String get(String key) {
-        return redisUtils.get(key);
-    }
+    void set(String key, String value);
     
-    @Override
-    public void set(String key, String value) {
-        redisUtils.set(key, value);
-    }
+    void set(String key, String value, long timeout, TimeUnit timeUnit);
     
-    @Override
-    public void set(String key, String value, long timeout, TimeUnit timeUnit) {
-        redisUtils.set(key, value, timeout, timeUnit);
-    }
-    
-    @Override
-    public void del(String key) {
-        redisUtils.del(key);
-    }
+    void del(String key);
 }

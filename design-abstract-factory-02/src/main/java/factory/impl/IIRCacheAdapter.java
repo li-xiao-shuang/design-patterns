@@ -14,34 +14,37 @@
  * limitations under the License.
  */
 
-import util.RedisUtils;
+package factory.impl;
+
+import factory.ICacheAdapter;
+import master.IIR;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author lixiaoshuang
  */
-public class CacheServcieImpl implements CacheService {
+public class IIRCacheAdapter implements ICacheAdapter {
     
-    private RedisUtils redisUtils = new RedisUtils();
+    private IIR iir = new IIR();
     
     @Override
     public String get(String key) {
-        return redisUtils.get(key);
+        return iir.get(key);
     }
     
     @Override
     public void set(String key, String value) {
-        redisUtils.set(key, value);
+        iir.set(key, value);
     }
     
     @Override
     public void set(String key, String value, long timeout, TimeUnit timeUnit) {
-        redisUtils.set(key, value, timeout, timeUnit);
+        iir.setExpire(key, value, timeout, timeUnit);
     }
     
     @Override
     public void del(String key) {
-        redisUtils.del(key);
+        iir.del(key);
     }
 }

@@ -14,39 +14,37 @@
  * limitations under the License.
  */
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package factory.impl;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import factory.ICacheAdapter;
+import master.EGM;
+
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author lixiaoshuang
  */
-public class RedisUtils {
+public class EGMCacheAdapter implements ICacheAdapter {
     
-    private Logger logger = LoggerFactory.getLogger(RedisUtils.class);
+    private EGM egm = new EGM();
     
-    private Map<String, String> dataMap = new ConcurrentHashMap<>();
-    
+    @Override
     public String get(String key) {
-        logger.info("Redis获取数据 key：{}", key);
-        return dataMap.get(key);
+        return egm.gain(key);
     }
     
+    @Override
     public void set(String key, String value) {
-        logger.info("Redis写入数据 key：{} val：{}", key, value);
-        dataMap.put(key, value);
+        egm.set(key, value);
     }
     
+    @Override
     public void set(String key, String value, long timeout, TimeUnit timeUnit) {
-        logger.info("Redis写入数据 key：{} val：{} timeout：{} timeUnit：{}", key, value, timeout, timeUnit.toString());
-        dataMap.put(key, value);
+        egm.setEx(key, value, timeout, timeUnit);
     }
     
+    @Override
     public void del(String key) {
-        logger.info("Redis删除数据 key：{}", key);
-        dataMap.remove(key);
+        egm.delete(key);
     }
 }

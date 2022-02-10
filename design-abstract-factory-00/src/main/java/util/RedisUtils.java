@@ -1,4 +1,4 @@
-/*
+package util;/*
  * Copyright 2021 Gypsophila open source organization.
  *
  * Licensed under the Apache License,Version2.0(the"License");
@@ -14,34 +14,39 @@
  * limitations under the License.
  */
 
-import util.RedisUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author lixiaoshuang
  */
-public class CacheServcieImpl implements CacheService {
+public class RedisUtils {
     
-    private RedisUtils redisUtils = new RedisUtils();
+    private Logger logger = LoggerFactory.getLogger(RedisUtils.class);
     
-    @Override
+    private Map<String, String> dataMap = new ConcurrentHashMap<>();
+    
     public String get(String key) {
-        return redisUtils.get(key);
+        logger.info("Redis获取数据 key：{}", key);
+        return dataMap.get(key);
     }
     
-    @Override
     public void set(String key, String value) {
-        redisUtils.set(key, value);
+        logger.info("Redis写入数据 key：{} val：{}", key, value);
+        dataMap.put(key, value);
     }
     
-    @Override
     public void set(String key, String value, long timeout, TimeUnit timeUnit) {
-        redisUtils.set(key, value, timeout, timeUnit);
+        logger.info("Redis写入数据 key：{} val：{} timeout：{} timeUnit：{}", key, value, timeout, timeUnit.toString());
+        dataMap.put(key, value);
     }
     
-    @Override
     public void del(String key) {
-        redisUtils.del(key);
+        logger.info("Redis删除数据 key：{}", key);
+        dataMap.remove(key);
     }
 }

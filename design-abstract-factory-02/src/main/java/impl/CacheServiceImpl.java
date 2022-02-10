@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+package impl;
+
 import util.RedisUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -21,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author lixiaoshuang
  */
-public class CacheServcieImpl implements CacheService {
+public class CacheServiceImpl implements CacheService {
     
     private RedisUtils redisUtils = new RedisUtils();
     

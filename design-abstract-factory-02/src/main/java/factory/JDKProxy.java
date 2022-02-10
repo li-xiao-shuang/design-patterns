@@ -1,4 +1,4 @@
-/*
+package factory;/*
  * Copyright 2021 Gypsophila open source organization.
  *
  * Licensed under the Apache License,Version2.0(the"License");
@@ -14,34 +14,19 @@
  * limitations under the License.
  */
 
-import util.RedisUtils;
 
-import java.util.concurrent.TimeUnit;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
 
 /**
  * @author lixiaoshuang
  */
-public class CacheServcieImpl implements CacheService {
+public class JDKProxy {
     
-    private RedisUtils redisUtils = new RedisUtils();
-    
-    @Override
-    public String get(String key) {
-        return redisUtils.get(key);
-    }
-    
-    @Override
-    public void set(String key, String value) {
-        redisUtils.set(key, value);
-    }
-    
-    @Override
-    public void set(String key, String value, long timeout, TimeUnit timeUnit) {
-        redisUtils.set(key, value, timeout, timeUnit);
-    }
-    
-    @Override
-    public void del(String key) {
-        redisUtils.del(key);
+    public static <T> T getProxy(Class<T> interfaceClass, ICacheAdapter cacheAdapter) {
+        InvocationHandler handler = new JDKInvocationHandler(cacheAdapter);
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        Class<?>[] classes = interfaceClass.getInterfaces();
+        return (T) Proxy.newProxyInstance(classLoader, new Class[] {classes[0]}, handler);
     }
 }
