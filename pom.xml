@@ -12,6 +12,7 @@
         <module>design-factory-01</module>
         <module>design-factory-00</module>
         <module>design-factory-02</module>
+        <module>design-abstract-factory-00</module>
     </modules>
     
     <properties>
