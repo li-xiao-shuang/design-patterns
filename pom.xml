@@ -17,6 +17,7 @@
         <module>design-abstract-factory-02</module>
         <module>design-build-00</module>
         <module>design-build-01</module>
+        <module>design-build-02</module>
     </modules>
     
     <properties>
