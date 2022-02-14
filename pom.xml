@@ -18,6 +18,8 @@
         <module>design-build-00</module>
         <module>design-build-01</module>
         <module>design-build-02</module>
+        <module>design-prototype-00</module>
+        <module>design-prototype-01</module>
     </modules>
     
     <properties>
