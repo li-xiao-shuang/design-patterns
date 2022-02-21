@@ -1,4 +1,4 @@
-/*
+package cuisine;/*
  * Copyright 2021 Gypsophila open source organization.
  *
  * Licensed under the Apache License,Version2.0(the"License");
@@ -13,19 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package adapter;
-
-import lombok.Data;
-
-import java.util.Date;
 
 /**
  * @author lixiaoshuang
  */
-@Data
-public class CreateAccount {
-    private String number;
-    private String address;
-    private Date accountDate;
-    private String desc;
+public interface OrderAdapterService {
+    boolean isFirst(String uId);
 }

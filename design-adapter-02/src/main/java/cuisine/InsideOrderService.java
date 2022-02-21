@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package adapter;
+package cuisine;
 
-import lombok.Data;
-
-import java.util.Date;
+import service.OrderService;
 
 /**
  * @author lixiaoshuang
  */
-@Data
-public class CreateAccount {
-    private String number;
-    private String address;
-    private Date accountDate;
-    private String desc;
+public class InsideOrderService implements OrderAdapterService {
+
+    private OrderService orderService = new OrderService();
+
+    @Override
+    public boolean isFirst(String uId) {
+        return orderService.queryUserOrderCount(uId) <= 1;
+    }
 }

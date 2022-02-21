@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package adapter;
+package cuisine;
 
-import lombok.Data;
-
-import java.util.Date;
+import service.POPOrderService;
 
 /**
  * @author lixiaoshuang
  */
-@Data
-public class CreateAccount {
-    private String number;
-    private String address;
-    private Date accountDate;
-    private String desc;
+public class POPOrderAdapterServiceImpl implements OrderAdapterService {
+
+    private POPOrderService popOrderService = new POPOrderService();
+
+    public boolean isFirst(String uId) {
+        return popOrderService.isFirstOrder(uId);
+    }
 }
