@@ -21,6 +21,8 @@
         <module>design-prototype-00</module>
         <module>design-prototype-01</module>
         <module>design-prototype-02</module>
+        <module>design-adapter-00</module>
+        <module>design-adapter-01</module>
     </modules>
     
     <properties>
