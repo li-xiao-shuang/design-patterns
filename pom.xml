@@ -23,6 +23,8 @@
         <module>design-prototype-02</module>
         <module>design-adapter-00</module>
         <module>design-adapter-01</module>
+        <module>design-bridging-00</module>
+        <module>design-bridging-01</module>
     </modules>
     
     <properties>
