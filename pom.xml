@@ -26,6 +26,8 @@
         <module>design-adapter-02</module>
         <module>design-group-00</module>
         <module>design-group-01</module>
+        <module>design-bridging-00</module>
+        <module>design-bridging-01</module>
     </modules>
     
     <properties>
